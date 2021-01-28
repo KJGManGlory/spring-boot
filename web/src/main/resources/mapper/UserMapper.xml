@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lizza.web.dao.UserDao">
+
+    <insert id="insert">
+            insert into da_api_access_log(
+                api,
+                uid,
+                user_id,
+                mobile_phone,
+                order_no,
+                json_result,
+                result_code,
+                access_ip,
+                request_id,
+                create_time,
+                biz_source
+            )values(
+                #{api},
+                #{uid},
+                #{userId},
+                #{mobilePhone},
+                #{orderNo},
+                #{jsonResult},
+                #{resultCode},
+                #{accessIp},
+                #{requestId},
+                #{createTime},
+                #{bizSource}
+            )
+    </insert>
+</mapper>
