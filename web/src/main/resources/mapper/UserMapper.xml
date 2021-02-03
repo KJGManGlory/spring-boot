@@ -29,4 +29,7 @@
                 #{bizSource}
             )
     </insert>
+    <select id="select" resultType="com.lizza.web.entity.User">
+        select * from user where id = #{id}
+    </select>
 </mapper>

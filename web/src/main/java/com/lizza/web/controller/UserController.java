@@ -23,4 +23,9 @@ public class UserController {
     public String addUser(User user) {
         return userService.addUser(user);
     }
+
+    @PostMapping("regex")
+    public String regex(String regex) {
+        return userService.regex(regex);
+    }
 }

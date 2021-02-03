@@ -20,4 +20,9 @@ public class HelloController {
     public String msg(String msg) {
         return "The MSG you entered is: " + msg;
     }
+
+    @GetMapping("regex")
+    public String regex(String regex) {
+        return "Hello, Spring Boot!";
+    }
 }

@@ -1,11 +1,11 @@
 package com.lizza.web;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.math.BigDecimal;
-
 @SpringBootApplication
+@MapperScan("com.lizza.web.dao")
 public class WebApplication {
 
 	public static void main(String[] args) {
