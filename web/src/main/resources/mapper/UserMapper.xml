@@ -32,4 +32,7 @@
     <select id="select" resultType="com.lizza.web.entity.User">
         select * from user where id = #{id}
     </select>
+    <select id="list" resultType="com.lizza.web.entity.User">
+        select * from user where id between #{param1} and #{param2}
+    </select>
 </mapper>
