@@ -27,7 +27,7 @@ public class AccessLogController {
     @PostMapping("updateOldData")
     public String updateOldData(Integer start, Integer end,
                         String uidKey, String phoneKey, String userIdKey,
-                        String uidRegex, String phoneRegex, String userIdRegex) {
+                        String uidRegex, String phoneRegex, String userIdRegex) throws Exception {
         return accessLogService.updateOldData(start, end, uidKey, phoneKey, userIdKey, uidRegex, phoneRegex, userIdRegex);
     }
 }
