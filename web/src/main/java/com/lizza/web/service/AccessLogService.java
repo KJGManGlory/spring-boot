@@ -7,6 +7,7 @@ import com.lizza.web.entity.AccessLog;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -74,15 +75,12 @@ public class AccessLogService {
 
                     Pattern phonePattern = Pattern.compile(phoneRegex);
                     Matcher phoneMatcher = phonePattern.matcher(jsonResult);
-                    while (uidMatcher.find()) {
+                    while (phoneMatcher.find()) {
                         JSONObject phoneObject = JSONObject.parseObject("{" + phoneMatcher.group() + "}");
                         contactPhone = phoneObject.getString(phoneKey);
                         break;
                     }
-
                     result += buildAccessLogAndUpdate(result, accessLog, uid, userId, contactPhone);
-
-                    log.info("Access Log 历史数据更新>>> 没有获取到 uid, 结构不符合解析器, 原始数据 ID: {}, JsonResult: {}", accessLog.getId(), jsonResult);
                 } catch (Exception e) {
                     log.error("Access Log 解析更新失败### 原始数据 ID: {}, JsonResult: {}", accessLog.getId(), jsonResult, e);
                 }
@@ -97,6 +95,9 @@ public class AccessLogService {
         uid = uid == null ? "" : uid;
         userId = userId == null ? "" : userId;
         contactPhone = contactPhone == null ? "" : contactPhone;
+        if (StringUtils.isEmpty(uid) && StringUtils.isEmpty(userId) && StringUtils.isEmpty(contactPhone)) {
+            return 0;
+        }
         accessLog.setUid(uid);
         accessLog.setUserId(userId);
         accessLog.setContactPhone(contactPhone);

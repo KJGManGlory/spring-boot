@@ -10,10 +10,15 @@
         )
     </insert>
     <update id="updateLog">
-        update access_log set uid = #{uid}, user_id = #{userId}, contact_phone = #{contactPhone}
+        update access_log
+        <set>
+            <if test="uid != null and uid != ''">uid = #{uid},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="contactPhone != null and contactPhone != ''">contact_phone = #{contactPhone},</if>
+        </set>
         where id = #{id}
     </update>
     <select id="getByPage" resultType="com.lizza.web.entity.AccessLog">
-        select * from access_log where id between #{param1} and #{param2}
+        select id, json_result jsonResult from access_log where id between #{param1} and #{param2}
     </select>
 </mapper>
