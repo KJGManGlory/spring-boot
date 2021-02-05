@@ -23,11 +23,4 @@ public class UserController {
     public String addUser(User user) {
         return userService.addUser(user);
     }
-
-    @PostMapping("regex")
-    public String regex(Integer start, Integer end,
-                        String uidKey, String phoneKey, String userIdKey,
-                        String uidRegex, String phoneRegex, String userIdRegex) {
-        return userService.regex(start, end, uidKey, phoneKey, userIdKey, uidRegex, phoneRegex, userIdRegex);
-    }
 }

@@ -3,31 +3,7 @@
 <mapper namespace="com.lizza.web.dao.UserDao">
 
     <insert id="insert">
-            insert into da_api_access_log(
-                api,
-                uid,
-                user_id,
-                mobile_phone,
-                order_no,
-                json_result,
-                result_code,
-                access_ip,
-                request_id,
-                create_time,
-                biz_source
-            )values(
-                #{api},
-                #{uid},
-                #{userId},
-                #{mobilePhone},
-                #{orderNo},
-                #{jsonResult},
-                #{resultCode},
-                #{accessIp},
-                #{requestId},
-                #{createTime},
-                #{bizSource}
-            )
+
     </insert>
     <select id="select" resultType="com.lizza.web.entity.User">
         select * from user where id = #{id}
