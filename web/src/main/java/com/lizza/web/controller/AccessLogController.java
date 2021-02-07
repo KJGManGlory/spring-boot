@@ -1,11 +1,9 @@
 package com.lizza.web.controller;
 
+import com.lizza.web.entity.AccessLog;
 import com.lizza.web.service.AccessLogService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Desc:
@@ -19,15 +17,16 @@ public class AccessLogController {
     @Autowired
     private AccessLogService accessLogService;
 
-    @PostMapping("insertBatch")
-    public void insertBatch(@RequestBody String json) {
-        accessLogService.insertBatch(json);
-    }
-
     @PostMapping("updateOldData")
-    public String updateOldData(Integer start, Integer end,
+    public int updateOldData(Integer start, Integer end,
                         String uidKey, String phoneKey, String userIdKey,
                         String uidRegex, String phoneRegex, String userIdRegex) throws Exception {
         return accessLogService.updateOldData(start, end, uidKey, phoneKey, userIdKey, uidRegex, phoneRegex, userIdRegex);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/updateOldAccessLog")
+    public void updateOldAccessLog (@RequestBody AccessLog accessLog) {
+        accessLogService.updateOldAccessLog(accessLog);
     }
 }
