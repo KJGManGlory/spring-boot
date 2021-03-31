@@ -1,32 +1,37 @@
 package com.lizza.web.controller;
 
-import com.lizza.web.entity.AccessLog;
 import com.lizza.web.service.AccessLogService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 
 /**
  * @Desc:
  * @author: lizza.liu
- * @date: 2021-02-05
+ * @date: 2021-03-30
  */
 @RestController
-@RequestMapping
+@RequestMapping("/accessLog")
 public class AccessLogController {
 
     @Autowired
     private AccessLogService accessLogService;
 
-    @PostMapping("updateOldData")
-    public int updateOldData(Integer start, Integer end,
-                        String uidKey, String phoneKey, String userIdKey,
-                        String uidRegex, String phoneRegex, String userIdRegex) throws Exception {
-        return accessLogService.updateOldData(start, end, uidKey, phoneKey, userIdKey, uidRegex, phoneRegex, userIdRegex);
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/updateOldAccessLog")
-    public void updateOldAccessLog (@RequestBody AccessLog accessLog) {
-        accessLogService.updateOldAccessLog(accessLog);
+    public static void main(String[] args) throws Exception {
+    	File file = new File("/Users/lizza/Desktop/log_data.log");
+        FileInputStream is = new FileInputStream(file);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        String str;
+        while((str = reader.readLine()) != null) {
+            System.out.println(str);
+        }
+        //close
+        is.close();
+        reader.close();
     }
 }

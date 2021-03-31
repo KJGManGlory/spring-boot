@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lizza.web.dao.AccessLogDao">
-
-    <insert id="insert">
-        insert into access_log(
-            json_result
-        )values(
-            #{jsonResult}
-        )
-    </insert>
-    <update id="updateLog">
-        update access_log
-        <set>
-            <if test="uid != null and uid != ''">uid = #{uid},</if>
-            <if test="userId != null and userId != ''">user_id = #{userId},</if>
-            <if test="contactPhone != null and contactPhone != ''">contact_phone = #{contactPhone},</if>
-        </set>
-        where id = #{id}
-    </update>
-    <select id="getByPage" resultType="com.lizza.web.entity.AccessLog">
-        select id, json_result jsonResult from access_log where id between #{param1} and #{param2}
+    <resultMap id="baseResultMap" type="com.lizza.web.entity.AccessLog">
+        <id column="id" property="id"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="uid" property="uid"/>
+        <result column="user_id" property="userId"/>
+        <result column="contact_phone" property="contactPhone"/>
+        <result column="json_result" property="jsonResult"/>
+        <result column="result_code" property="resultCode"/>
+        <result column="api" property="api"/>
+        <result column="access_ip" property="accessIp"/>
+        <result column="create_time" property="createTime"/>
+        <result column="request_id" property="requestId"/>
+        <result column="biz_source" property="bizSource"/>
+    </resultMap>
+    <select id="getAccessLogsByUid" resultMap="baseResultMap">
+        select * from da_api_access_log where uid = #{uid}
     </select>
 </mapper>
